@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이벤트 연결/제거</title>
+<script type="text/javascript">
+	let counter = 0;
+	let isConnect = false;
+
+	document.addEventListener('DOMContentLoaded', function () {
+		const h1 = document.querySelector('h1');
+		const target = document.querySelector('#target');
+		const state = document.querySelector('#state');
+		const connectBtn = document.querySelector('#connect');
+		const disconnectBtn = document.querySelector('#disconnect');
+
+		// 👇 콜백 : 매개변수값으로 입력되는 함수, 매개변수로 처리 될때는 리스너(핸들러)
+		const callback = function () {
+			counter++;
+			target.textContent = counter;
+			state.textContent = '연결';
+		};
+
+		connectBtn.addEventListener('click', function () {
+			if (!isConnect) {
+				h1.addEventListener('click', callback);
+				isConnect = true;
+			}
+		});
+
+		disconnectBtn.addEventListener('click', function () {
+			if (isConnect) {
+				h1.removeEventListener('click', callback);
+				state.textContent = '해제';
+				isConnect = false;
+			}
+		});
+	});
+</script>
+
+<style type="text/css">
+	h1 {
+		user-select: none;
+		cursor: pointer;
+	}
+</style>
+</head>
+<body>
+	<h1>클릭횟수 : <span id="target">0</span></h1>
+	<button id="connect">이벤트 연결</button>
+	<button id="disconnect">이벤트 제거</button>
+	<p>이벤트 연결 상태: <span id="state">해제</span></p>
+</body>
+</html>

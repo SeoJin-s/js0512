@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>움직이는 이모지</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+
+    #target {
+      position: absolute;
+      font-size: 32px;
+    }
+
+    #message {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      color: crimson;
+      font-weight: bold;
+      font-family: 'Apple SD Gothic Neo', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <span id="target">😊</span>
+  <div id="message"></div>
+
+  <script type="text/javascript">
+    const star = document.querySelector('#target');
+    const msg = document.getElementById('message');
+
+    let x = 0;
+    let y = 0;
+    const block = 40;
+
+    const print = function () {
+      star.style.left = x * block + 'px';
+      star.style.top = y * block + 'px';
+    };
+    print();
+
+    document.body.addEventListener('keydown', function (e) {
+      switch (e.key) {
+        case 'ArrowLeft':
+          x -= 1;
+          break;
+        case 'ArrowRight':
+          x += 1;
+          break;
+        case 'ArrowUp':
+          y -= 1;
+          break;
+        case 'ArrowDown':
+          y += 1;
+          break;
+        default:
+          alert('방향키만 사용가능!');
+          return;
+      }
+
+      let hit = false;
+
+      if (x < 0) {
+        x = 0;
+        hit = true;
+      }
+      if (y < 0) {
+        y = 0;
+        hit = true;
+      }
+
+      if (hit) {
+        msg.textContent = '쿵!';
+        setTimeout(() => {
+          msg.textContent = '';
+        }, 800);
+      }
+
+      print();
+    });
+  </script>
+</body>
+</html>

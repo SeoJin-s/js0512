@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	생일을 입력하세요
+	<input type="date" id="birth">
+	<button id="btn">한국나이출력</button>
+	<hr>
+	<h1>당신의 한국 나이는 <span id="target" style="color:blue;"></span>입니다.</h1>
+	
+	<script type="text/javascript">
+		
+		const today = new Date();	// 오늘 날짜 객체 생성
+		const todayYear = today.getFullYear();	// 올해 연도
+		const todayMonth = today.getMonth() + 1;	// 현재 월 (0부터 시작하니 +1)
+		const todayDate = today.getDate();	// 오늘 날짜
+		
+		// 디버깅
+		console.log('todayYear: ', todayYear);
+		console.log('todayMonth: ', todayMonth);
+		console.log('todayDate: ', todayDate);
+		
+		// 버튼 클릭시 실행
+	    document.querySelector('#btn').addEventListener('click', function () {
+	        const birthInput = document.querySelector('#birth').value;	// 입력된생일값
+	        if (!birthInput) {
+	          alert('생일을 입력해주세요');
+	          return;	
+	    }
+	        
+	    const birthDate = new Date(birthInput);	// 입력값을 Date 객체러 변환
+	    const birthYear = birthDate.getFullYear();	// 출생 연도 추출
+	    const koreaAge = todayYear - birthYear + 1; // 한국식 나이 계산
+	    
+	    // 결과 출력
+	    document.querySelector('#target').textContent = koreaAge;
+	    });
+	</script>
+</body>
+</html>
