@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	PW: <input type="password" id="pw1"><br>
+	확인: <input type="password" id="pw2">
+	
+	<button id="btn" >하츄핑</button> 
+	
+<script type="text/javascript">
+	  // 첫 번째 입력칸: 길이 검사
+	  document.querySelector('#pw1').addEventListener('blur', function () {
+	    if (this.value.length < 4) {
+	      alert('패스워드는 4자 이상이어야 합니다!');
+	      this.focus();
+	    } else {
+	      document.querySelector('#pw2').focus();
+	    }
+	  });
+	
+	  // 두 번째 입력칸: 값 일치 검사
+	  document.querySelector('#pw2').addEventListener('blur', function () {
+	    const pw1 = document.querySelector('#pw1').value;
+	    const pw2 = this.value;
+	
+	    if (pw1 !== pw2) {
+	      alert('패스워드가 일치하지 않습니다!');
+	      setTimeout(() => this.focus(), 0); // 🔁 무한 blur 방지용
+	    }
+	  });
+	</script>
+</body>
+</html>
